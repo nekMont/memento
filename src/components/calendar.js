@@ -1,5 +1,3 @@
-import logo from "./logo.svg";
-import "./App.css";
 import CalendarHeatmap from "react-calendar-heatmap";
 import "react-calendar-heatmap/dist/styles.css";
 import React from "react";
@@ -44,21 +42,17 @@ class Fun extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <CalendarHeatmap
-            //onClick?: ((value: any) => void) | undefined;
-            //classForValue?: ((value: any) => any) | undefined
-            values={this.state.values}
-            className="calendar-heatmap"
-            startDate={new Date("2024-01-01")}
-            endDate={new Date("2024-12-31")}
-            onClick={(value) =>
-              alert(`You clicked on ${value.date.toISOString().slice(0, 10)}`)
-            }
-          />
-        </div>
-      </div>
+      <CalendarHeatmap
+        //onClick?: ((value: any) => void) | undefined;
+        //classForValue?: ((value: any) => any) | undefined
+        values={this.state.values}
+        className="calendar-heatmap"
+        startDate={new Date("2024-01-01")}
+        endDate={new Date("2024-12-31")}
+        onClick={(value) =>
+          alert(`You clicked on ${value.date.toISOString().slice(0, 10)}`)
+        }
+      />
     );
   }
 }
