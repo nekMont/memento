@@ -35,7 +35,7 @@ function generateValuesForYear(date = new Date()) {
   return values;
 }
 
-class Fun extends React.Component {
+class Calender extends React.Component {
   state = {
     values: generateValuesForYear(),
   };
@@ -57,4 +57,4 @@ class Fun extends React.Component {
   }
 }
 
-export default Fun;
+export default Calender;
