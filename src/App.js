@@ -10,6 +10,8 @@ import React from "react";
 We can add someClick count to the values object for the specified date.
 */
 
+/*TODO fix color highlighting, create component for for calendar heat map*/
+
 //reference: https://www.kevinqi.com/react-calendar-heatmap/
 //https://github.com/kevinsqi/react-calendar-heatmap/blob/master/demo/src/Demo.js
 
