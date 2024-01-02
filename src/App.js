@@ -2,12 +2,16 @@ import logo from "./logo.svg";
 import "./App.css";
 import CalendarHeatmap from "react-calendar-heatmap";
 import "react-calendar-heatmap/dist/styles.css";
+import React from "react";
 
 //count would probaby need some type of onClick functionality. so if square clicked. then increment count
-
+//do momento in some old timey type writter style? something plain like how its styled in the terminal
 /* need to use tooltipDataAttrs to get the specified date we clicked on. one we click on that date
 We can add someClick count to the values object for the specified date.
 */
+
+//reference: https://www.kevinqi.com/react-calendar-heatmap/
+//https://github.com/kevinsqi/react-calendar-heatmap/blob/master/demo/src/Demo.js
 
 /*Shifts the number of days from the start of the year. so (2024-01-01, 10) would be something like january 11th*/
 function shiftDate(date, numDays) {
@@ -31,27 +35,30 @@ function generateValuesForYear(date = new Date()) {
   return values;
 }
 
-function App() {
-  return (
-    <div className="App">
-      <div className="App-header">
-        <CalendarHeatmap
-          //onClick?: ((value: any) => void) | undefined;
-          //classForValue?: ((value: any) => any) | undefined
-          className="calendar-heatmap"
-          startDate={new Date("2024-01-01")}
-          endDate={new Date("2024-12-31")}
-          onClick={(value) =>
-            alert(`You clicked on ${value.date.toISOString().slice(0, 10)}}`)
-          }
-          values={[
-            { date: "2024-01-01", count: 12 },
-            // ...and so on
-          ]}
-        />
+class Fun extends React.Component {
+  state = {
+    values: generateValuesForYear(),
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <div className="App-header">
+          <CalendarHeatmap
+            //onClick?: ((value: any) => void) | undefined;
+            //classForValue?: ((value: any) => any) | undefined
+            values={this.state.values}
+            className="calendar-heatmap"
+            startDate={new Date("2024-01-01")}
+            endDate={new Date("2024-12-31")}
+            onClick={(value) =>
+              alert(`You clicked on ${value.date.toISOString().slice(0, 10)}`)
+            }
+          />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
-export default App;
+export default Fun;
