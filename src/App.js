@@ -8,8 +8,13 @@ import Calender from "./components/calendar";
 function App() {
   return (
     <div className="App">
-      <div className="App-header">
-        <Calender />
+      <div className="container">
+        <div className="top">
+          <p>momento</p>
+        </div>
+        <div className="App-header">
+          <Calender />
+        </div>
       </div>
     </div>
   );
