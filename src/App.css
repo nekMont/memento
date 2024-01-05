@@ -36,7 +36,7 @@
   font-size: 50px;
   font-family: menlo;
 }
-/* If you want to scale down the entire calendar heatmap */
+
 .calendar-heatmap {
   transform: scale(0.1);
   transform-origin: top left;

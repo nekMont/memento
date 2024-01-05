@@ -1,14 +1,16 @@
 import CalendarHeatmap from "react-calendar-heatmap";
 import "react-calendar-heatmap/dist/styles.css";
 import React from "react";
+import "./calendar.css";
 
-//count would probaby need some type of onClick functionality. so if square clicked. then increment count
-//do momento in some old timey type writter style? something plain like how its styled in the terminal
+/*TODOS*/
+/* Add tooltipDateAttrs on hover*/
+/* Add onClick markDown functionality */
+/* restrict being able to select for a day after current day*/
+
 /* need to use tooltipDataAttrs to get the specified date we clicked on. one we click on that date
 We can add someClick count to the values object for the specified date.
 */
-
-/*TODO fix color highlighting, create component for for calendar heat map*/
 
 //reference: https://www.kevinqi.com/react-calendar-heatmap/
 //https://github.com/kevinsqi/react-calendar-heatmap/blob/master/demo/src/Demo.js
@@ -36,9 +38,29 @@ function generateValuesForYear(date = new Date()) {
 }
 
 class Calender extends React.Component {
+  constructor(props) {
+    super(props);
+    this.counterState = {
+      counter: 0,
+    };
+  }
+
+  incrementCounter = (value) => {
+    this.setState((prevState) => {
+      const newValues = prevState.values.map((v) => {
+        if (v.date === value.date) {
+          return { ...v, count: v.count + 1 };
+        }
+        return v;
+      });
+      return { values: newValues };
+    });
+  };
+
   state = {
     values: generateValuesForYear(),
   };
+  handleClick = () => {};
 
   render() {
     return (
@@ -49,9 +71,13 @@ class Calender extends React.Component {
         className="calendar-heatmap"
         startDate={new Date("2024-01-01")}
         endDate={new Date("2024-12-31")}
-        onClick={(value) =>
-          alert(`You clicked on ${value.date.toISOString().slice(0, 10)}`)
-        }
+        onClick={this.incrementCounter}
+        classForValue={(value) => {
+          if (!value || value.count === 0) {
+            return "color-empty";
+          }
+          return "color-scale-1";
+        }}
       />
     );
   }
