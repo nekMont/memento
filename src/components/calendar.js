@@ -1,5 +1,6 @@
 import CalendarHeatmap from "react-calendar-heatmap";
 import "react-calendar-heatmap/dist/styles.css";
+import { Tooltip as ReactTooltip } from "react-tooltip";
 import React from "react";
 import "./calendar.css";
 
@@ -44,11 +45,26 @@ class Calender extends React.Component {
       counter: 0,
     };
   }
+  /* having issues here, cant seem to get the tool tip to pop up.
+  getTooltipDataAttrs = (value) => {
+    if (!value || !value.date) {
+      return null;
+    }
 
+    const formattedDate = value.date.toISOString().slice(0, 10);
+    console.log({
+      formattedDate,
+      value,
+    });
+    return {
+      "data-tip": `Date: ${formattedDate}`,
+    };
+  };
+*/
   incrementCounter = (value) => {
     this.setState((prevState) => {
       const newValues = prevState.values.map((v) => {
-        if (v.date === value.date) {
+        if (v.date.getTime() === value.date.getTime()) {
           return { ...v, count: v.count + 1 };
         }
         return v;
@@ -60,25 +76,28 @@ class Calender extends React.Component {
   state = {
     values: generateValuesForYear(),
   };
-  handleClick = () => {};
 
   render() {
     return (
-      <CalendarHeatmap
-        //onClick?: ((value: any) => void) | undefined;
-        //classForValue?: ((value: any) => any) | undefined
-        values={this.state.values}
-        className="calendar-heatmap"
-        startDate={new Date("2024-01-01")}
-        endDate={new Date("2024-12-31")}
-        onClick={this.incrementCounter}
-        classForValue={(value) => {
-          if (!value || value.count === 0) {
-            return "color-empty";
-          }
-          return "color-scale-1";
-        }}
-      />
+      <div>
+        <CalendarHeatmap
+          //onClick?: ((value: any) => void) | undefined;
+          //classForValue?: ((value: any) => any) | undefined
+          values={this.state.values}
+          className="calendar-heatmap"
+          startDate={new Date("2024-01-01")}
+          endDate={new Date("2024-12-31")}
+          onClick={this.incrementCounter}
+          tooltipDataAttrs={this.getTooltipDataAttrs}
+          classForValue={(value) => {
+            if (!value || value.count === 0) {
+              return "color-empty";
+            }
+            return "color-scale-1";
+          }}
+        />
+        <ReactTooltip />
+      </div>
     );
   }
 }
